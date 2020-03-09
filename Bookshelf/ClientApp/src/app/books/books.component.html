@@ -1,0 +1,27 @@
+<h1 id="tableLabel">My Books</h1>
+
+<p *ngIf="!books"><em>Loading...</em></p>
+
+<table class='table <!--table-striped--> table-hover' aria-labelledby="tableLabel" *ngIf="books">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Year</th>
+      <th><button class="btn btn-sm btn-primary">Add book</button></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of books">
+      <td>{{ book.id }}</td>
+      <td>{{ book.name }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.year }}</td>
+      <td>
+        <!--<button class="btn btn-sm btn-primary" (click)="editBook(b)">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="delete(b)">Delete</button>-->
+      </td>
+    </tr>
+  </tbody>
+</table>
