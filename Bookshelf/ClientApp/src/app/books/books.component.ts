@@ -1,23 +1,32 @@
-import { Component, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BookService } from '../services/book.service';
+import { Book } from '../models/book';
 
 @Component({
   selector: 'app-books',
   templateUrl: './books.component.html'
 })
-export class BooksComponent {
-  public books: Book[];
+export class BooksComponent implements OnInit {
+  books$: Observable<Book[]>;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<Book[]>(baseUrl + 'books').subscribe(result => {
-      this.books = result;
-    }, error => console.error(error));
+  constructor(private bookService: BookService) {
   }
-}
 
-interface Book {
-  id: number;
-  name: string;
-  author: string;
-  year: number;
+  ngOnInit() {
+    this.loadBooks();
+  }
+
+  loadBooks() {
+    this.books$ = this.bookService.getBooks();
+  }
+
+  delete(id) {
+    const ans = confirm('Do you want to delete book with id: ' + id);
+    if (ans) {
+      this.bookService.deleteBook(id).subscribe((data) => {
+        this.loadBooks();
+      });
+    }
+  }
 }
