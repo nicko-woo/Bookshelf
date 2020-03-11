@@ -1,8 +1,9 @@
 <ng-container *ngIf="(book$ | async) as book; else loading">
 
-    <h1>{{ book.id }}</h1>
-    <div>{{ book.name }}</div>
+    <h1>Book #{{ book.id }}</h1>
+    <br>
     <ul>
+      <li>{{ book.name }}</li>
       <li>{{ book.author }}</li>
       <li>{{ book.year }}</li>
     </ul>

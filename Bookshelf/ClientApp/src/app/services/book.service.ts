@@ -20,7 +20,7 @@ export class BookService {
   };
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
       this.myAppUrl = baseUrl;
-      this.myApiUrl = 'books';
+      this.myApiUrl = 'books/';
   }
 
   getBooks(): Observable<Book[]> {

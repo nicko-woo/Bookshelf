@@ -34,7 +34,7 @@ export class BookAddEditComponent implements OnInit {
         id: 0,
         name: ['', [Validators.required]],
         author: ['', [Validators.required]],
-        year: [0, [Validators.required]]
+        year: ['', [Validators.required]]
       }
     );
   }
@@ -59,28 +59,28 @@ export class BookAddEditComponent implements OnInit {
     }
 
     if (this.actionType === 'Add') {
-      let book: Book = {
+      const book: Book = {
         name: this.form.get(this.formName).value,
         author: this.form.get(this.formAuthor).value,
-        year: 1900
+        year: +this.form.get(this.formAuthor).value
       };
 
       this.bookService.saveBook(book)
         .subscribe((data) => {
-          this.router.navigate(['/book', data.id]);
+          this.router.navigate(['/']);
         });
     }
 
     if (this.actionType === 'Edit') {
-      let book: Book = {
+      const book: Book = {
         id: this.existingBook.id,
-        year: this.existingBook.year,
+        year: +this.form.get(this.formAuthor).value,
         name: this.form.get(this.formName).value,
         author: this.form.get(this.formAuthor).value
       };
       this.bookService.updateBook(book.id, book)
         .subscribe((data) => {
-          this.router.navigate([this.router.url]);
+          this.router.navigate(['/']);
         });
     }
   }
@@ -89,6 +89,6 @@ export class BookAddEditComponent implements OnInit {
     this.router.navigate(['/']);
   }
 
-  // get title() { return this.form.get(this.formTitle); }
-  // get body() { return this.form.get(this.formBody); }
+  get name() { return this.form.get(this.formName); }
+  get author() { return this.form.get(this.formAuthor); }
 }
