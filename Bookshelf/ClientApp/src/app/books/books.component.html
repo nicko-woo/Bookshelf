@@ -1,12 +1,8 @@
-<h1>My books</h1>
-
+<a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New book</a>
 <p *ngIf="!(books$ | async)"><em>Loading...</em></p>
-<p>
-  <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New book</a>
-</p>
 
 <table class="table table-sm table-hover" *ngIf="(books$ | async)?.length>0">
-  <thead>
+  <thead class="thead the">
     <tr>
       <th>#</th>
       <th>Name</th>
@@ -22,8 +18,8 @@
       <td><a [routerLink]="['/book/', book.id]">{{ book.name }}</a></td>
       <td>{{ book.author }}</td>
       <td>{{ book.year }}</td>
-      <td><a [routerLink]="['/book/edit/', book.id]" class="btn btn-primary btn-sm float-right">Edit</a></td>
-      <td><a [routerLink]="" (click)="delete(book.id)" class="btn btn-danger btn-sm float-right">Delete</a></td>
+      <td><a [routerLink]="['/book/edit/', book.id]" class="btn btn-outline-primary btn-sm float-right">Edit</a></td>
+      <td><a [routerLink]="" (click)="delete(book.id)" class="btn btn-outline-danger btn-sm float-right">Delete</a></td>
     </tr>
   </tbody>
 </table>

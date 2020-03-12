@@ -1,38 +1,26 @@
-<h1>{{actionType}} Book</h1>
-<form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
-
-  <div class="form-group row">
-    <label class=" control-label col-md-12">Name</label>
-    <div class="col-md-12">
-      <input class="form-control" type="text" formControlName="name">
+<div class="col-md-6">
+  <h2 class="text-center">Add/Edit Book</h2>
+  <form [formGroup]="form" (ngSubmit)="save()">
+    
+    <div class="form-group">
+      <label for="name">Book Name:</label>
+      <input type="text" formControlName="name" placeholder="name" name="name" class="form-control" id="name">
     </div>
-    <span class="text-danger ml-3" *ngIf="name.invalid && formDir.submitted">
-      Name is required.
-    </span>
-  </div>
 
-  <div class="form-group row">
-    <label class=" control-label col-md-12">Author</label>
-    <div class="col-md-12">
-      <input class="form-control" type="text" formControlName="author">
+    <div class="form-group">
+      <label for="author">Author:</label>
+      <input type="text" formControlName="author" placeholder="author" name="author" class="form-control" id="author">
     </div>
-    <span class="text-danger ml-3" *ngIf="author.invalid && formDir.submitted">
-      Author`s name is required.
-    </span>
-  </div>
 
-  <div class="form-group row">
-    <label class=" control-label col-md-12">Year</label>
-    <div class="col-md-12">
-      <input class="form-control" type="number" formControlName="year">
+    <div class="form-group">
+      <label for="year">Year:</label>
+      <input type="number" formControlName="year" placeholder="year" name="year" class="form-control" id="year">
     </div>
-    <span class="text-danger ml-3" *ngIf="year.invalid && formDir.submitted">
-      Year is required.
-    </span>
-  </div>
 
-  <div class="form-group">
-    <button type="submit" class="btn btn-success float-right">Save</button>
-    <button class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
-  </div>
-</form>
+    <div class="form-group">
+      <button type="submit" class="btn btn-success float-right">Save</button>
+      <button class="btn btn-secondary float-left" (click)="cancel()">Cancel</button>
+    </div>
+
+  </form>
+</div>

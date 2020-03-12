@@ -12,9 +12,6 @@ import { Book } from '../models/book';
 export class BookAddEditComponent implements OnInit {
   form: FormGroup;
   actionType: string;
-  formName: string;
-  formYear: number;
-  formAuthor: string;
   id: number;
   errorMessage: any;
   existingBook: Book;
@@ -22,9 +19,7 @@ export class BookAddEditComponent implements OnInit {
   constructor(private bookService: BookService, private formBuilder: FormBuilder, private avRoute: ActivatedRoute, private router: Router) {
     const idParam = 'id';
     this.actionType = 'Add';
-    this.formName = 'name';
-    this.formAuthor = 'author';
-    this.formYear = 1900;
+
     if (this.avRoute.snapshot.params[idParam]) {
       this.id = this.avRoute.snapshot.params[idParam];
     }
@@ -32,9 +27,9 @@ export class BookAddEditComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         id: 0,
-        name: ['', [Validators.required]],
-        author: ['', [Validators.required]],
-        year: ['', [Validators.required]]
+        name: ['', Validators.required],
+        author: ['', Validators.required],
+        year: ['', Validators.required]
       }
     );
   }
@@ -44,12 +39,9 @@ export class BookAddEditComponent implements OnInit {
     if (this.id > 0) {
       this.actionType = 'Edit';
       this.bookService.getBook(this.id)
-        .subscribe(data => (
-          this.existingBook = data,
-          this.form.controls[this.formName].setValue(data.name),
-          this.form.controls[this.formAuthor].setValue(data.author),
-          this.form.controls[this.formYear].setValue(data.year)
-        ));
+        .subscribe(data => {
+          this.form.setValue(data);
+        });
     }
   }
 
@@ -59,26 +51,15 @@ export class BookAddEditComponent implements OnInit {
     }
 
     if (this.actionType === 'Add') {
-      const book: Book = {
-        name: this.form.get(this.formName).value,
-        author: this.form.get(this.formAuthor).value,
-        year: +this.form.get(this.formAuthor).value
-      };
-
-      this.bookService.saveBook(book)
+      this.bookService.saveBook(this.form.value)
         .subscribe((data) => {
           this.router.navigate(['/']);
         });
     }
 
     if (this.actionType === 'Edit') {
-      const book: Book = {
-        id: this.existingBook.id,
-        year: +this.form.get(this.formAuthor).value,
-        name: this.form.get(this.formName).value,
-        author: this.form.get(this.formAuthor).value
-      };
-      this.bookService.updateBook(book.id, book)
+
+      this.bookService.updateBook(this.id, this.form.value)
         .subscribe((data) => {
           this.router.navigate(['/']);
         });
@@ -88,7 +69,4 @@ export class BookAddEditComponent implements OnInit {
   cancel() {
     this.router.navigate(['/']);
   }
-
-  get name() { return this.form.get(this.formName); }
-  get author() { return this.form.get(this.formAuthor); }
 }
