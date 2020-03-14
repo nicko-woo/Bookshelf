@@ -5,15 +5,21 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BooksComponent } from './books/books.component';
-import { BookComponent } from './book/book.component';
-import { BookAddEditComponent } from './book-add-edit/book-add-edit.component';
-import { GenresComponent } from './genres/genres.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BooksComponent } from './components/books/books.component';
+import { BookComponent } from './components/books/book/book.component';
+import { BookAddEditComponent } from './components/books/book-add-edit/book-add-edit.component';
+import { GenresComponent } from './components/genres/genres.component';
 import { BookService } from './services/book.service';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    NotFoundComponent,
     BooksComponent,
     BookComponent,
     BookAddEditComponent,
