@@ -2,8 +2,16 @@
     <a class="navbar-brand" href="/">Bookshelf</a>
     <div class="navbar-expand mr-auto">
         <div class="navbar-nav">
-            <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="active">Books</a>
-            <a class="nav-item nav-link" [routerLink]="['genres']" routerLinkActive="active">Genres</a>
+            <a class="nav-item nav-link" [routerLink]="['/']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">Books</a>
+            <a class="nav-item nav-link" [routerLink]="['desiredBooks']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">Desired</a>
+            <a class="nav-item nav-link" [routerLink]="['genres']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">Genres</a>
+            <a class="nav-item nav-link" [routerLink]="['authors']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">Authors</a>
+            <a class="nav-item nav-link" [routerLink]="['dashborad']" routerLinkActive="active" [routerLinkActiveOptions]="{exact:
+                true}">Dashboard</a>
         </div>
     </div>
 </nav>
