@@ -45,6 +45,10 @@ export class BookAddEditComponent implements OnInit {
     }
   }
 
+  get name() {return this.form.get('name'); }
+  get author() {return this.form.get('author'); }
+  get year() {return this.form.get('year'); }
+
   save() {
     if (!this.form.valid) {
       return;

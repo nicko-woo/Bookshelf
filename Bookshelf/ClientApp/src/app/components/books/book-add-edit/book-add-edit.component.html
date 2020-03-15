@@ -1,23 +1,33 @@
 <div class="col-md-6">
-  <h2 class="text-center">Add/Edit Book</h2>
+  <h2 *ngIf="actionType === 'Add';else unset" class="text-center">Add book</h2>
+  <ng-template #unset>  
+    <h2 class="text-center">Edit book</h2>  
+  </ng-template> 
+
   <form [formGroup]="form" (ngSubmit)="save()" #formDir="ngForm" novalidate>
     
     <div class="form-group">
       <label for="name">Book Name:</label>
-      <input type="text" formControlName="name" placeholder="name" name="name" class="form-control" id="name">
+      <input type="text" formControlName="name" placeholder="Title" name="name" class="form-control" id="name" required>
+      <span class="text-danger ml-3" *ngIf="name.invalid && formDir.submitted">
+        Name is required.
+      </span>
     </div>
 
     <div class="form-group">
       <label for="author">Author:</label>
-      <input type="text" formControlName="author" placeholder="author" name="author" class="form-control" id="author">
+      <input type="text" formControlName="author" placeholder="Author" name="author" class="form-control" id="author">
+      <span class="text-danger ml-3" *ngIf="author.invalid && formDir.submitted">
+        Author is required.
+      </span>
     </div>
 
     <div class="form-group">
       <label for="year">Year:</label>
-      <input type="number" formControlName="year" placeholder="year" name="year" class="form-control" id="year">
-      <!-- <span class="text-danger ml-3" *ngIf="year.invalid && formDir.submitted">
-        Year is required.
-      </span> -->
+      <input type="number" formControlName="year" placeholder="Year" name="year" class="form-control" id="year">
+      <span class="text-danger ml-3" *ngIf="year.invalid && formDir.submitted">
+        Incorrect year.
+      </span>
     </div>
 
     <div class="form-group">

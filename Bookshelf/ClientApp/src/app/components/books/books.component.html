@@ -1,8 +1,23 @@
-<a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New book</a>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <h2>Read books</h2>
+    </div>
+    <div class="col-sm">
+      <a [routerLink]="['/add']" class="btn btn-primary float-right mb-3">New book</a>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="searchTerm" class="form-control" placeholder="Search..." />
+      </div>
+    </div>
+  </div>
+</div>
 <p *ngIf="!(books$ | async)"><em>Loading...</em></p>
 
-<table class="table table-sm table-hover" *ngIf="(books$ | async)?.length>0">
-  <thead class="thead the">
+<table class="table table-hover" *ngIf="(books$ | async)?.length>0">
+  <thead class="thead-light">
     <tr>
       <th>#</th>
       <th>Name</th>
@@ -13,7 +28,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let book of (books$ | async)">
+    <tr *ngFor="let book of (books$ | async | booksFilter:searchTerm)">
       <td>{{ book.id }}</td>
       <td><a [routerLink]="['/book/', book.id]">{{ book.name }}</a></td>
       <td>{{ book.author }}</td>

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class BooksComponent implements OnInit {
   books$: Observable<Book[]>;
+  searchTerm: string;
 
   constructor(private router: Router, private bookService: BookService) {
   }
