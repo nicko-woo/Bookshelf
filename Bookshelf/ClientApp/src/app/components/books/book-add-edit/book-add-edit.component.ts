@@ -38,7 +38,7 @@ export class BookAddEditComponent implements OnInit {
 
     if (this.id > 0) {
       this.actionType = 'Edit';
-      this.bookService.getBook(this.id)
+      this.bookService.findOne(this.id)
         .subscribe(data => {
           this.form.setValue(data);
         });
@@ -55,7 +55,7 @@ export class BookAddEditComponent implements OnInit {
     }
 
     if (this.actionType === 'Add') {
-      this.bookService.saveBook(this.form.value)
+      this.bookService.save(this.form.value)
         .subscribe((data) => {
           this.router.navigate(['/']);
         });
@@ -63,7 +63,7 @@ export class BookAddEditComponent implements OnInit {
 
     if (this.actionType === 'Edit') {
 
-      this.bookService.updateBook(this.id, this.form.value)
+      this.bookService.update(this.id, this.form.value)
         .subscribe((data) => {
           this.router.navigate(['/']);
         });

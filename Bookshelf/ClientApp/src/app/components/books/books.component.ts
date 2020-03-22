@@ -20,13 +20,13 @@ export class BooksComponent implements OnInit {
   }
 
   loadBooks() {
-    this.books$ = this.bookService.getBooks();
+    this.books$ = this.bookService.findAll();
   }
 
   delete(id) {
     const ans = confirm('Do you want to delete book with id: ' + id);
     if (ans) {
-      this.bookService.deleteBook(id).subscribe((data) => {
+      this.bookService.delete(id).subscribe((data) => {
         this.loadBooks();
       });
     }

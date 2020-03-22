@@ -5,15 +5,12 @@ using System.Threading.Tasks;
 
 namespace Bookshelf.Models
 {
-    public class Book
+    public class Author
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Author { get; set; }
-        public int Year { get; set; }
-        public bool IsDeleted { get; set; }
         public List<AuthorBook> AuthorBooks { get; set; }
-        public Book()
+        public Author()
         {
             AuthorBooks = new List<AuthorBook>();
         }

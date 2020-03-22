@@ -25,6 +25,6 @@ export class BookComponent implements OnInit {
   }
 
   loadBook() {
-    this.book$ = this.bookService.getBook(this.id);
+    this.book$ = this.bookService.findOne(this.id);
   }
 }

@@ -21,8 +21,22 @@ namespace Bookshelf.Data
 
             builder.Entity<Book>().Property<bool>("IsDeleted");
             builder.Entity<Book>().HasQueryFilter(b => EF.Property<bool>(b, "IsDeleted") == false);
+
+            builder.Entity<AuthorBook>()
+            .HasKey(t => new { t.AuthorId, t.BookId });
+
+            builder.Entity<AuthorBook>()
+                .HasOne(sc => sc.Author)
+                .WithMany(s => s.AuthorBooks)
+                .HasForeignKey(sc => sc.AuthorId);
+
+            builder.Entity<AuthorBook>()
+                .HasOne(sc => sc.Book)
+                .WithMany(c => c.AuthorBooks)
+                .HasForeignKey(sc => sc.BookId);
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
     }
 }
